@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>
+        Войти
+    </h1>
+    {% if from.errors %}
+        Пароль и никнейм не совпадают. Пожалуйста попробуйте заново
+    {% else %}
+        <p>Пожалуйста заполняйте форму</p>
+    {% endif %}
+        <div class="login-form">
+            <form action="{% url 'login' %}" method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type="hidden", name="next" value="{{ next }}"/>
+                <p>
+                    <input type="submit", value="Войти">
+                </p>
+                <p>
+                    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                </p>
+            </form>
+        </div>
+{% endblock %}
